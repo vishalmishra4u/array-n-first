@@ -1,18 +1,34 @@
 var isNumber = require('is-number');
 
-module.exports = function first(arr, index1 = 0, index2){
-  if(!Array.isArray(arr)){
-    throw new Error('array-n-first expects first arguement as an array.');
+module.exports = {
+  first : function(arr, index2){
+    if(!Array.isArray(arr)){
+      throw new Error('array-n-first expects first arguement as an array.');
+    }
+
+    if(arr.length === 0){
+      return null;
+    }
+
+    var firstN = firstN(arr, 0, isNumber(index2) ? index2 : 0);
+
+    return firstN;
   }
 
-  if(arr.length === 0){
-    return null;
+  midN : function(arr, index1 = 0, index2){
+    if(!Array.isArray(arr)){
+      throw new Error('array-n-first expects first arguement as an array.');
+    }
+
+    if(arr.length === 0){
+      return null;
+    }
+
+    var firstN = firstN(arr, isNumber(index1) ? index2 : 0, isNumber(index2) ? index2 : 0);
+
+    return firstN;
   }
-
-  var firstN = firstN(arr, 0, isNumber(index2) ? index2 : 0);
-
-  return firstN;
-}
+};
 
 function firstN(arr, index1, index2){
   var tempArray = [];
