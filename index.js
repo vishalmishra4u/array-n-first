@@ -10,11 +10,8 @@ function first(arr){
   if(!Array.isArray(arr)){
     throw new Error('array-n-first expects first arguement as an array.');
   }
-
-  if(arr.length === 0){
-    return null;
-  }
-
+  
+  checkInputValidity(arr, index1, index2);
   return getElements(arr, 0, 1);
 }
 
@@ -23,15 +20,22 @@ function midN(arr, index1 = 0, index2){
     throw new Error('array-n-first expects first arguement as an array.');
   }
 
-  if(!isNumber(index1) || isNumber(index2)){
+  checkInputValidity(arr, index1, index2);
+  return getElements(arr, isNumber(index1) ? index2 : 0, isNumber(index2) ? index2 : 0);
+}
+
+function checkInputValidity(arr, index1, index2){
+  if(!isNumber(index1) || !isNumber(index2)){
     throw new Error('Indexes must be an integer');
   }
 
+  if(index1+1 > arr.length || index2+1 > arr.length){
+     throw new Error('Indexes must be less than size of array');
+  }
+  
   if(arr.length === 0){
     return null;
   }
-
-  return getElements(arr, isNumber(index1) ? index2 : 0, isNumber(index2) ? index2 : 0);
 }
 
 function getElements(arr, index1, index2){
