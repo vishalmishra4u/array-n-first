@@ -3,44 +3,49 @@ var isNumber = require('is-number');
 module.exports = {
   first : first,
   midN : midN,
-  getElements : getElements
+  getElements : getElements,
+  checkInputValidity : checkInputValidity
 };
 
 function first(arr){
   if(!Array.isArray(arr)){
     throw new Error('array-n-first expects first arguement as an array.');
   }
-  
-  checkInputValidity(arr, index1, index2);
+
+  checkInputValidity(arr, position1, position2);
   return getElements(arr, 0, 1);
 }
 
-function midN(arr, index1 = 0, index2){
+function midN(arr, position1 = 0, position2){
   if(!Array.isArray(arr)){
     throw new Error('array-n-first expects first arguement as an array.');
   }
 
-  checkInputValidity(arr, index1, index2);
-  return getElements(arr, isNumber(index1) ? index2 : 0, isNumber(index2) ? index2 : 0);
+  checkInputValidity(arr, position1, position2);
+  return getElements(arr, isNumber(position1) ? position1 : 0, isNumber(position2) ? position2 : 0);
 }
 
-function checkInputValidity(arr, index1, index2){
-  if(!isNumber(index1) || !isNumber(index2)){
-    throw new Error('Indexes must be an integer');
+function checkInputValidity(arr, position1, position2){
+  if(!isNumber(position1) || !isNumber(position2)){
+    throw new Error('positions must be an integer');
   }
 
-  if(index1+1 > arr.length || index2+1 > arr.length){
-     throw new Error('Indexes must be less than size of array');
+  if(position1+1 > arr.length || position2+1 > arr.length){
+     throw new Error('positions must be less than size of array');
   }
-  
+
+  if(position1 < 1 || position2 < 1){
+      throw new Error('positions must be greater than 1');
+  }
+
   if(arr.length === 0){
     return null;
   }
 }
 
-function getElements(arr, index1, index2){
+function getElements(arr, position1, position2){
   var tempArray = [];
-  for(var i = index1; i < index2 + 1;i++){
+  for(var i = position1-1; i < position2;i++){
     tempArray.push(arr[i]);
   }
 
