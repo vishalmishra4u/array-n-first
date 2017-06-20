@@ -1,6 +1,6 @@
 # array-n-first
 
-Short package to get the first n elements of an array
+Short package to get either the first n elements of an array or mid n elements of an array
 
 ### Example
 
